@@ -6,6 +6,13 @@ import { connect } from 'react-redux';
 import ExpenseListFilters from './ExpenseListFilters';
 import {removeExpense} from '../actions/expenseActions';
 
+const Styles = {
+    buttonIcon:{
+        padding:'0px',
+        float:'right'
+    }
+};
+
 const getTotalBudget = (items) => {
     let totalBudget = 0;
     items.forEach((item) => {
@@ -26,11 +33,13 @@ const ItemsList = (props) => (
             {props.expenses.map((itemDetails) => {
                 let amountType = parseFloat(itemDetails.amount) > 0 ? 'positive' : 'negative';
                 return (
-                    <li key={itemDetails.id}>{itemDetails.description} <span className={amountType}>{itemDetails.amount}</span> 
-                        {/*<IconButton primary={true} label="Edit" onClick={()=>this.editExpense(itemDetails.id)}/>*/}
-                        {<IconButton color="secondary" onClick={()=>deleteExpense(props,itemDetails.id)}>
+                    <li key={itemDetails.id}>
+                        {itemDetails.description} 
+                        <IconButton color="secondary" style={Styles.buttonIcon} onClick={()=>deleteExpense(props,itemDetails.id)}>
                             <DeleteIcon />
-                        </IconButton>}
+                        </IconButton>
+                        <span className={amountType}>{itemDetails.amount}</span> 
+                        {/*<IconButton primary={true} label="Edit" onClick={()=>this.editExpense(itemDetails.id)}/>*/}
                     </li>
                 );
             })}

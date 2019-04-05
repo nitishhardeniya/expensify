@@ -99,10 +99,12 @@ form {
 
 .items-list li .positive {
     color: #3dab3d;
+    padding: 0px 20px;
 }
 
 .items-list li span.negative {
     color: #e86464;
+    padding: 0px 20px;
 }
 
 .items-list .no-items {

@@ -89,6 +89,7 @@ class AddExpense extends React.Component {
                             </Cell>
                             <Cell col={12}>
                                 {/*<DatePicker value={this.state.item.date} onChange={this.handleDate.bind(this)} hintText="Select a date"/>*/}
+                                <TextField id="date" label="Select a date" type="date" defaultValue={this.state.item.date} onChange={this.handleDate.bind(this)} InputLabelProps={{shrink: true}} />
                             </Cell>
                             <Cell col={12}>
                                 <Button variant="contained" color="primary" type="submit">Add</Button>
