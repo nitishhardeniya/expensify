@@ -12,7 +12,7 @@ const store = expenseStore();
 store.dispatch(addExpense({id:parseInt(Math.random() * 100),description:'First item',amount:900}));
 store.dispatch(addExpense({id:parseInt(Math.random() * 100),description:'Second item',amount:200}));
 
-const unsubscribe = store.subscribe(()=>{
+/*const unsubscribe = store.subscribe(()=>{
 	const getVisibleExpenses = (expenses ,{ text, sortBy ,startDate , endDate}) => {
 		const filteredExpenses = expenses.filter((item)=>{
 			const textMatch = item.description.toLowerCase().includes(text.toLowerCase()) 
@@ -23,7 +23,7 @@ const unsubscribe = store.subscribe(()=>{
 	const state = store.getState();
 	const visibleExpenses = getVisibleExpenses(state.expenses,state.filters);
     console.log("Redux store update main.js : ", visibleExpenses)
-})
+})*/
 
 ReactDOM.render(
 

@@ -27,6 +27,7 @@ class AddExpense extends React.Component {
     
     handleDate(event, date){
         let newItem = {
+            id: parseInt(Math.random() * 100),
             description:this.state.item.description,
             amount:this.state.item.amount,
             date:date
@@ -37,6 +38,7 @@ class AddExpense extends React.Component {
     // Return a fresh item.
     _getFreshItem() {
         return {
+            id:0,
             description: '',
             amount: '',
             date:null
@@ -62,13 +64,14 @@ class AddExpense extends React.Component {
 
         event.preventDefault();
         let newItem = {
+            id: parseInt(Math.random() * 100),
             description:this.state.item.description || '-',
             amount:this.state.item.amount || '0'
         };
         this.setState({
             item: newItem
         },()=>{
-            this.props.dispatch(addExpense({description:newItem.description,amount:newItem.amount}));
+            this.props.dispatch(addExpense({id:newItem.id,description:newItem.description,amount:newItem.amount}));
             this.setState({ item : this._getFreshItem() });    
             this.props.history.push('/');
         })

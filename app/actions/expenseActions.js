@@ -10,7 +10,6 @@ export function addExpense({id= 0,description = '',amount = 0,date = 0} = {}){
     }
 }
 
-
 export function removeExpense({id}={}) {
 	return {
 		type : 'REMOVE_EXPENSE',
