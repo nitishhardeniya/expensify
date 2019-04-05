@@ -1,6 +1,4 @@
 import React from 'react';
-//import WalletActions from '../actions/walletActions';
-import WalletStore from '../stores/walletStore';
 import FlatButton from 'material-ui/FlatButton';
 import IconButton from 'material-ui/IconButton';
 //import DeleteIcon from 'material-ui/Delete';
@@ -14,27 +12,12 @@ class ItemsList extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            //items: WalletStore.getAllItems()
             items : props.expenses
         };
-        //this._onChange = this._onChange.bind(this);
         this.editExpense = this.editExpense.bind(this);
     }
- 
-    /*_onChange() {
-        this.setState({ items: WalletStore.getAllItems() });
-    }
-
-    componentWillMount() {
-        WalletStore.on('change',this._onChange);
-    }
- 
-    componentWillUnmount() {
-        WalletStore.removeListener('change',this._onChange);
-    }*/
 
     editExpense(id){
-        WalletActions.editExpense(id);
         this.props.history.push("/edit/"+id);
     }
 

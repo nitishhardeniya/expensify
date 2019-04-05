@@ -1,5 +1,4 @@
 import React from 'react';
-import WalletActions from '../actions/walletActions';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import {Grid , Cell} from 'react-mdl';
@@ -12,13 +11,13 @@ class AddExpense extends React.Component {
     // Set the initial state.
     constructor(props) {
         super(props);
- 
-        this._getFreshItem = this._getFreshItem.bind(this);
-        this.handleDate = this.handleDate.bind(this);
-         
+    
         this.state = {
             item: this._getFreshItem()
         };
+
+        this._getFreshItem = this._getFreshItem.bind(this);
+        this.handleDate = this.handleDate.bind(this);
     }
     
     handleDate(event, date){
@@ -64,7 +63,6 @@ class AddExpense extends React.Component {
         this.setState({
             item: newItem
         },()=>{
-            WalletActions.addNewItem(this.state.item);
             this.props.dispatch(addExpense({description:newItem.description,amount:newItem.amount}));
             this.setState({ item : this._getFreshItem() });    
             this.props.history.push('/');
@@ -93,7 +91,6 @@ class AddExpense extends React.Component {
                         </Cell>
 
                         <Cell col={6}></Cell>
-
                         
                     </Grid>
                 </form>
