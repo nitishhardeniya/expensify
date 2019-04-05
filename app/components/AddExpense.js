@@ -1,28 +1,33 @@
 import React from 'react';
-import WalletActions from '../actions/walletActions';
-import TextField from 'material-ui/TextField';
-import RaisedButton from 'material-ui/RaisedButton';
-import {Grid , Cell} from 'react-mdl';
-import DatePicker from 'material-ui/DatePicker';
+
+//Redux imports
 import { connect } from 'react-redux';
 import {addExpense} from '../actions/expenseActions';
+
+//Material-ui imports
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+//import DatePicker from 'material-ui/DatePicker';
+
+import {Grid , Cell} from 'react-mdl';
 
 class AddExpense extends React.Component {
  
     // Set the initial state.
     constructor(props) {
         super(props);
- 
-        this._getFreshItem = this._getFreshItem.bind(this);
-        this.handleDate = this.handleDate.bind(this);
-         
+    
         this.state = {
             item: this._getFreshItem()
         };
+
+        this._getFreshItem = this._getFreshItem.bind(this);
+        this.handleDate = this.handleDate.bind(this);
     }
     
     handleDate(event, date){
         let newItem = {
+            id: parseInt(Math.random() * 100),
             description:this.state.item.description,
             amount:this.state.item.amount,
             date:date
@@ -33,6 +38,7 @@ class AddExpense extends React.Component {
     // Return a fresh item.
     _getFreshItem() {
         return {
+            id:0,
             description: '',
             amount: '',
             date:null
@@ -58,14 +64,14 @@ class AddExpense extends React.Component {
 
         event.preventDefault();
         let newItem = {
+            id: parseInt(Math.random() * 100),
             description:this.state.item.description || '-',
             amount:this.state.item.amount || '0'
         };
         this.setState({
             item: newItem
         },()=>{
-            WalletActions.addNewItem(this.state.item);
-            this.props.dispatch(addExpense({description:newItem.description,amount:newItem.amount}));
+            this.props.dispatch(addExpense({id:newItem.id,description:newItem.description,amount:newItem.amount}));
             this.setState({ item : this._getFreshItem() });    
             this.props.history.push('/');
         })
@@ -77,23 +83,22 @@ class AddExpense extends React.Component {
             <div>
                 <form className="form-inline add-item" onSubmit={this._addNewItem.bind(this)}>
                     <Grid>
-                        <Cell col={6}>
+                        <Cell col={4}>
                             <Cell col={12}>
-                                <TextField name="description" label="Description" value={this.state.item.description} placeholder="Description" onChange={this._updateState.bind(this)} />
+                                <TextField fullWidth={true} name="description" label="Description" value={this.state.item.description} placeholder="Description" onChange={this._updateState.bind(this)} />
                             </Cell>
                             <Cell col={12}>
-                                <TextField name="amount" label="Amount" value={this.state.item.amount} placeholder="Amount" onChange={this._updateState.bind(this)} />        
+                                <TextField fullWidth={true} name="amount" label="Amount" value={this.state.item.amount} placeholder="Amount" onChange={this._updateState.bind(this)} />        
                             </Cell>
                             <Cell col={12}>
-                                <DatePicker value={this.state.item.date} onChange={this.handleDate.bind(this)} hintText="Select a date"/>
+                                {/*<DatePicker value={this.state.item.date} onChange={this.handleDate.bind(this)} hintText="Select a date"/>*/}
+                                <TextField id="date" label="Select a date" type="date" defaultValue={this.state.item.date} onChange={this.handleDate.bind(this)} InputLabelProps={{shrink: true}} />
                             </Cell>
                             <Cell col={12}>
-                                <RaisedButton primary={true} label="Add" type="submit"/>
+                                <Button variant="contained" color="primary" type="submit">Add</Button>
                             </Cell>
                         </Cell>
-
-                        <Cell col={6}></Cell>
-
+                        <Cell col={8}></Cell>
                         
                     </Grid>
                 </form>

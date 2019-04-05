@@ -1,10 +1,10 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {setTextFilter} from '../actions/filterActions';
-import TextField from 'material-ui/TextField';
+import TextField from '@material-ui/core/TextField';
 
 const ExpenseListFilters = (props) => (
-	<div>
+	<div className="list-filter">
 		Search : <TextField name="search_expense" value={props.filters.text} onChange={(e)=>{
 			props.dispatch(setTextFilter({text:e.target.value}))
 		}}/>

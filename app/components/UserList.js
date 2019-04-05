@@ -2,10 +2,20 @@ import React from 'react';
 import UserStore from '../stores/userStore';
 import WalletActions from '../actions/walletActions';
 import request from 'superagent';
-import {Card, CardTitle, CardText, CardMedia} from 'material-ui/Card';
-import Dialog from 'material-ui/Dialog';
-import RaisedButton from 'material-ui/RaisedButton';
-import FlatButton from 'material-ui/FlatButton';
+
+//Material-ui imports
+import Card from '@material-ui/core/Card';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
+import Typography from '@material-ui/core/Typography';
+import Dialog from '@material-ui/core/Dialog';
+import MuiDialogTitle from '@material-ui/core/DialogTitle';
+import MuiDialogContent from '@material-ui/core/DialogContent';
+import MuiDialogActions from '@material-ui/core/DialogActions';
+import Button from '@material-ui/core/Button';
+
 import { Grid, Cell } from 'react-mdl';
 import moment from 'moment';
 
@@ -27,7 +37,7 @@ class UserList extends React.Component {
     }
 
     _userDataReceived(){
-    	console.log("Update from Stores");
+    	console.log("Update from Flux Stores");
     	this.setState({
     		userInfo : UserStore.getUserInfo()
     	})
@@ -61,7 +71,7 @@ class UserList extends React.Component {
 
 	render() {
 		const modalActions = [
-			<RaisedButton secondary={true} label="close" onClick={this.handleClose.bind(this)} />
+			<Button color="secondary" onClick={this.handleClose.bind(this)} >close </Button>
 		];
 		
 		return (
@@ -72,42 +82,63 @@ class UserList extends React.Component {
 						
 							<Cell col={2} key={user.id}>
 								<Card className="user-card">
-									<CardMedia>
-										<img src={user.avatar_url} />
-									</CardMedia>
-									<CardTitle title={user.login} />
-									<CardText>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec mattis pretium massa. Aliquam erat volutpat.</CardText>
-									<FlatButton primary={true} label="View details" onClick={() => this.handleOpen(user.login)}/>
-								</Card>
+							      <CardActionArea>
+							        <CardMedia 
+							        	component="img"
+							        	height="200"
+							        	image={user.avatar_url}
+							        />
+							        <CardContent>
+							          <Typography gutterBottom variant="h5" component="h2">
+							            {user.login}
+							          </Typography>
+							          <Typography component="p">
+							            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec mattis pretium massa. Aliquam erat volutpat.
+							          </Typography>
+							        </CardContent>
+							      </CardActionArea>
+							      <CardActions>
+							        <Button color="primary" onClick={() => this.handleOpen(user.login)} >View details</Button>
+							      </CardActions>
+							    </Card>
+
 							</Cell>
 					)
 				}
 				</Grid>
-				<Dialog title={ this.state.userInfo.name } open={this.state.modalOpen} actions={modalActions} onRequestClose={this.handleClose.bind(this)}>
-					<Grid >
-						<Cell col={3}>Location :</Cell>
-						<Cell col={9}>{ this.state.userInfo.location}</Cell>
-					</Grid>
+				<Dialog open={this.state.modalOpen} actions={modalActions}>
+					<MuiDialogTitle id="customized-dialog-title" onClose={this.handleClose.bind(this)}>
+		            	{this.state.userInfo.name}
+		          	</MuiDialogTitle>
+					<MuiDialogContent>
+						<Grid >
+							<Cell col={3}>Location :</Cell>
+							<Cell col={9}>{ this.state.userInfo.location}</Cell>
+						</Grid>
 
-					<Grid >
-						<Cell col={3}>Created at :</Cell>
-						<Cell col={9}>{ moment(this.state.userInfo.created_at).format('ll') }</Cell>
-					</Grid>
+						<Grid >
+							<Cell col={3}>Created at :</Cell>
+							<Cell col={9}>{ moment(this.state.userInfo.created_at).format('ll') }</Cell>
+						</Grid>
 
-					<Grid >
-						<Cell col={3}>Company :</Cell>
-						<Cell col={9}>{ this.state.userInfo.company}</Cell>
-					</Grid>
+						<Grid >
+							<Cell col={3}>Company :</Cell>
+							<Cell col={9}>{ this.state.userInfo.company}</Cell>
+						</Grid>
 
-					<Grid >
-						<Cell col={3}>Followers :</Cell>
-						<Cell col={9}>{ this.state.userInfo.followers}</Cell>
-					</Grid>
+						<Grid >
+							<Cell col={3}>Followers :</Cell>
+							<Cell col={9}>{ this.state.userInfo.followers}</Cell>
+						</Grid>
 
-					<Grid >
-						<Cell col={3}>Public repos :</Cell>
-						<Cell col={9}>{ this.state.userInfo.public_repos}</Cell>
-					</Grid>
+						<Grid >
+							<Cell col={3}>Public repos :</Cell>
+							<Cell col={9}>{ this.state.userInfo.public_repos}</Cell>
+						</Grid>
+					</MuiDialogContent>
+					<MuiDialogActions>
+			            {modalActions}
+			        </MuiDialogActions>
 
 				</Dialog>
 			
