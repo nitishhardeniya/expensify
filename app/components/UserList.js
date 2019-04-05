@@ -27,7 +27,7 @@ class UserList extends React.Component {
     }
 
     _userDataReceived(){
-    	console.log("Update from Stores");
+    	console.log("Update from Flux Stores");
     	this.setState({
     		userInfo : UserStore.getUserInfo()
     	})

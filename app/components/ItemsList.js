@@ -7,69 +7,38 @@ import { connect } from 'react-redux';
 import ExpenseListFilters from './ExpenseListFilters';
 import {removeExpense} from '../actions/expenseActions';
 
-class ItemsList extends React.Component {
- 
-    constructor(props) {
-        super(props);
-        this.state = {
-            items : props.expenses
-        };
-        this.editExpense = this.editExpense.bind(this);
-    }
+const getTotalBudget = (items) => {
+    let totalBudget = 0;
 
-    editExpense(id){
-        this.props.history.push("/edit/"+id);
-    }
+    items.forEach((item) => {
+        totalBudget += parseFloat(item.amount);
+    });
 
-    deleteExpense(id){
-        let newItemsList = [...this.state.items].filter((item)=>item.id != id)
-        this.setState({
-            items : newItemsList
-        })
-        this.props.dispatch(removeExpense({id}));
-    }
-
-    getTotalBudget() {
-        let totalBudget = 0;
- 
-        this.state.items.forEach((item) => {
-            totalBudget += parseFloat(item.amount);
-        });
- 
-        return totalBudget;
-    }
- 
-    render() {
- 
-        let noItemsMessage;
-        
-        // Show a friendly message instead if there are no items.
-        if (!this.state.items.length) {
-            noItemsMessage = (<li className="no-items">Your wallet is new!</li>);
-        }
-    
-
-        return (
-            <div>
-                <ExpenseListFilters />
-                <h3 className="total-budget">INR {this.getTotalBudget()}</h3>
-                <ul className="items-list">
-                    {noItemsMessage}
-                    {this.state.items.map((itemDetails) => {
-                        let amountType = parseFloat(itemDetails.amount) > 0 ? 'positive' : 'negative';
-                        return (
-                            <li key={itemDetails.id}>{itemDetails.description} <span className={amountType}>{itemDetails.amount}</span> 
-                                {/*<FlatButton primary={true} label="Edit" onClick={()=>this.editExpense(itemDetails.id)}/>*/}
-                                {<FlatButton secondary={true} label="X" onClick={()=>this.deleteExpense(itemDetails.id)}/>}
-                            </li>
-                        );
-                    })}
-                </ul>
-            </div>
-        );
-    }
+    return totalBudget;
 }
- 
+
+const deleteExpense = (props,id) => {
+    props.dispatch(removeExpense({id}));
+}
+
+const ItemsList = (props) => (
+    <div>
+        <ExpenseListFilters />
+        <h3 className="total-budget">INR {getTotalBudget(props.expenses)}</h3>
+        <ul className="items-list">
+            {props.expenses.map((itemDetails) => {
+                let amountType = parseFloat(itemDetails.amount) > 0 ? 'positive' : 'negative';
+                return (
+                    <li key={itemDetails.id}>{itemDetails.description} <span className={amountType}>{itemDetails.amount}</span> 
+                        {/*<FlatButton primary={true} label="Edit" onClick={()=>this.editExpense(itemDetails.id)}/>*/}
+                        {<FlatButton secondary={true} label="X" onClick={()=>deleteExpense(props,itemDetails.id)}/>}
+                    </li>
+                );
+            })}
+        </ul>
+    </div>
+);
+
 export default connect((state)=>{
     return {
         expenses : state.expenses,
