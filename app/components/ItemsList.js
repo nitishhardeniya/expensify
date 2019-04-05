@@ -8,11 +8,9 @@ import {removeExpense} from '../actions/expenseActions';
 
 const getTotalBudget = (items) => {
     let totalBudget = 0;
-
     items.forEach((item) => {
         totalBudget += parseFloat(item.amount);
     });
-
     return totalBudget;
 }
 

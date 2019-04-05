@@ -7,7 +7,7 @@ import {addExpense} from '../actions/expenseActions';
 //Material-ui imports
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import DatePicker from 'material-ui/DatePicker';
+//import DatePicker from 'material-ui/DatePicker';
 
 import {Grid , Cell} from 'react-mdl';
 
@@ -88,15 +88,12 @@ class AddExpense extends React.Component {
                                 <TextField fullWidth={true} name="amount" label="Amount" value={this.state.item.amount} placeholder="Amount" onChange={this._updateState.bind(this)} />        
                             </Cell>
                             <Cell col={12}>
-                                <DatePicker value={this.state.item.date} onChange={this.handleDate.bind(this)} hintText="Select a date"/>
+                                {/*<DatePicker value={this.state.item.date} onChange={this.handleDate.bind(this)} hintText="Select a date"/>*/}
                             </Cell>
                             <Cell col={12}>
-                                <Button variant="contained" color="primary" type="submit">
-                                    Add
-                                </Button>
+                                <Button variant="contained" color="primary" type="submit">Add</Button>
                             </Cell>
                         </Cell>
-
                         <Cell col={8}></Cell>
                         
                     </Grid>
