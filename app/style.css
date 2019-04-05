@@ -1,10 +1,6 @@
-.active-link{
-    font-weight: 500;
-    color: rgb(46, 46, 105);
-}
-
-nav a {
-    padding: 10px;
+.app-container {
+    height: 100vh;
+    background-color: #f5f5f5;
 }
 
 .title {
@@ -15,6 +11,15 @@ nav a {
 
 .app-header {
     height: 100px;
+}
+
+.active-link{
+    font-weight: 500;
+    color: rgb(46, 46, 105);
+}
+
+nav a {
+    padding: 10px;
 }
 
 .edit {
@@ -31,6 +36,15 @@ nav a {
 
 .user-list {
     margin-top: 20px;
+}
+
+.item-list-container {
+    min-height: 70vh;
+}
+
+.item-list-container, .list-filter {
+    width: 75vw;
+    margin: 0 auto;
 }
 
 .container {

@@ -28,22 +28,24 @@ const deleteExpense = (props,id) => {
 const ItemsList = (props) => (
     <div>
         <ExpenseListFilters />
-        <h3 className="total-budget">INR {getTotalBudget(props.expenses)}</h3>
-        <ul className="items-list">
-            {props.expenses.map((itemDetails) => {
-                let amountType = parseFloat(itemDetails.amount) > 0 ? 'positive' : 'negative';
-                return (
-                    <li key={itemDetails.id}>
-                        {itemDetails.description} 
-                        <IconButton color="secondary" style={Styles.buttonIcon} onClick={()=>deleteExpense(props,itemDetails.id)}>
-                            <DeleteIcon />
-                        </IconButton>
-                        <span className={amountType}>INR {itemDetails.amount}</span> 
-                        {/*<IconButton primary={true} label="Edit" onClick={()=>this.editExpense(itemDetails.id)}/>*/}
-                    </li>
-                );
-            })}
-        </ul>
+        <div className="item-list-container">
+            <h3 className="total-budget">INR {getTotalBudget(props.expenses)}</h3>
+            <ul className="items-list">
+                {props.expenses.map((itemDetails) => {
+                    let amountType = parseFloat(itemDetails.amount) > 0 ? 'positive' : 'negative';
+                    return (
+                        <li key={itemDetails.id}>
+                            {itemDetails.description} 
+                            <IconButton color="secondary" style={Styles.buttonIcon} onClick={()=>deleteExpense(props,itemDetails.id)}>
+                                <DeleteIcon />
+                            </IconButton>
+                            <span className={amountType}>INR {itemDetails.amount}</span> 
+                            {/*<IconButton primary={true} label="Edit" onClick={()=>this.editExpense(itemDetails.id)}/>*/}
+                        </li>
+                    );
+                })}
+            </ul>
+        </div>
     </div>
 );
 
