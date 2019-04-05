@@ -1,7 +1,6 @@
 import React from 'react';
-import FlatButton from 'material-ui/FlatButton';
-import IconButton from 'material-ui/IconButton';
-//import DeleteIcon from 'material-ui/Delete';
+import IconButton from '@material-ui/core/IconButton';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 import { connect } from 'react-redux';
 import ExpenseListFilters from './ExpenseListFilters';
@@ -30,8 +29,10 @@ const ItemsList = (props) => (
                 let amountType = parseFloat(itemDetails.amount) > 0 ? 'positive' : 'negative';
                 return (
                     <li key={itemDetails.id}>{itemDetails.description} <span className={amountType}>{itemDetails.amount}</span> 
-                        {/*<FlatButton primary={true} label="Edit" onClick={()=>this.editExpense(itemDetails.id)}/>*/}
-                        {<FlatButton secondary={true} label="X" onClick={()=>deleteExpense(props,itemDetails.id)}/>}
+                        {/*<IconButton primary={true} label="Edit" onClick={()=>this.editExpense(itemDetails.id)}/>*/}
+                        {<IconButton color="secondary" onClick={()=>deleteExpense(props,itemDetails.id)}>
+                            <DeleteIcon />
+                        </IconButton>}
                     </li>
                 );
             })}

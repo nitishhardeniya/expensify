@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {setTextFilter} from '../actions/filterActions';
-import TextField from 'material-ui/TextField';
+import TextField from '@material-ui/core/TextField';
 
 const ExpenseListFilters = (props) => (
 	<div>
