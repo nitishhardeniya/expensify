@@ -1,10 +1,12 @@
 import React from 'react';
-import IconButton from '@material-ui/core/IconButton';
-import DeleteIcon from '@material-ui/icons/Delete';
 
 import { connect } from 'react-redux';
 import ExpenseListFilters from './ExpenseListFilters';
 import {removeExpense} from '../actions/expenseActions';
+import selectExpenses from '../selectors/expenses';
+
+import IconButton from '@material-ui/core/IconButton';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 const Styles = {
     buttonIcon:{
@@ -49,12 +51,13 @@ const ItemsList = (props) => (
     </div>
 );
 
-export default connect((state)=>{
+const mapStateToProps = (state) => {
     return {
-        expenses : state.expenses,
-        filters : state.filters
+        expenses : selectExpenses(state.expenses,state.filters)
     }
-})(ItemsList);
+}
+
+export default connect(mapStateToProps)(ItemsList);
 
 
 
