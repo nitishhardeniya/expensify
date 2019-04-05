@@ -38,7 +38,7 @@ const ItemsList = (props) => (
                         <IconButton color="secondary" style={Styles.buttonIcon} onClick={()=>deleteExpense(props,itemDetails.id)}>
                             <DeleteIcon />
                         </IconButton>
-                        <span className={amountType}>{itemDetails.amount}</span> 
+                        <span className={amountType}>INR {itemDetails.amount}</span> 
                         {/*<IconButton primary={true} label="Edit" onClick={()=>this.editExpense(itemDetails.id)}/>*/}
                     </li>
                 );

@@ -3,11 +3,6 @@
     color: rgb(46, 46, 105);
 }
 
-
-body {
-    padding-top: 50px;
-}
-
 nav a {
     padding: 10px;
 }
@@ -19,7 +14,7 @@ nav a {
 }
 
 .app-header {
-    height: 60px;
+    height: 100px;
 }
 
 .edit {
@@ -56,14 +51,10 @@ nav a {
 }
 
 .app-title {
-    font-weight: 400;
-    font-size: 30px;
-    color: #adadad;
-}
-
-.app-title,
-.total-budget {
     text-align: center;
+    font-size: 30px;
+    line-height: 2;
+    color: #42bdb1;
 }
 
 .total-budget {
@@ -74,6 +65,7 @@ nav a {
     font-size: 65px;
     font-weight: 100;
     margin-bottom: 15px;
+    text-align: center;
 }
 
 form {
