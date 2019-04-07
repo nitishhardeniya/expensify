@@ -3,9 +3,11 @@
   "version": "1.0.0",
   "description": "App to manage expenses",
   "main": "index.js",
+  "homepage": "https://nitishhardeniya.github.io/expensify/",
   "scripts": {
     "build": "webpack-dev-server",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest --watch",
+    "predeploy" : "npm run build",
     "deploy": "gh-pages -d build"
   },
   "author": "Nitish Hardeniya",
@@ -30,9 +32,12 @@
   },
   "devDependencies": {
     "babel-core": "^6.26.3",
+    "babel-jest": "^24.7.1",
     "babel-loader": "^7.1.5",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
-    "babel-preset-stage-3": "^6.24.1"
+    "babel-preset-stage-3": "^6.24.1",
+    "gh-pages": "^2.0.1",
+    "jest": "^23.6.0"
   }
 }
