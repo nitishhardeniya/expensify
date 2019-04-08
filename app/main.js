@@ -28,7 +28,7 @@ store.dispatch(addExpense({id:parseInt(Math.random() * 100),description:'Second 
 ReactDOM.render(
 
 		<Provider store={store}>
-			<BrowserRouter>
+			<BrowserRouter basename="/expensify">
 				<App />
 			</BrowserRouter>
 		</Provider>,
