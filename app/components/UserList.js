@@ -1,6 +1,4 @@
 import React from 'react';
-import UserStore from '../stores/userStore';
-import WalletActions from '../actions/walletActions';
 import request from 'superagent';
 
 //Material-ui imports
@@ -24,43 +22,33 @@ class UserList extends React.Component {
 	constructor(){
 		super();
 		this.state = {
-			users : UserStore.getAllUsers(),
+			users : [],
 			userInfo:{},
 			modalOpen:false
 		};
-		this._userDataReceived = this._userDataReceived.bind(this);
 	}
 
-
-	_onChange() {
-        this.setState({ users: UserStore.getAllUsers() });
-    }
-
-    _userDataReceived(){
-    	console.log("Update from Flux Stores");
-    	this.setState({
-    		userInfo : UserStore.getUserInfo()
-    	})
-    	this.setState({
-    		modalOpen:true
-    	});
-    }
-
     componentDidMount() {
-        //UserStore.on('change',this._onChange);
-    	request.get('https://api.github.com/users')
+        request.get('https://api.github.com/users')
 			.end((err,response)=> {
 				this.setState({ users : response.body})
 			});
     }
- 
-    componentWillUnmount() {
-        UserStore.removeListener('change',this._onChange);
-    }
+
+    getUserDetails(user){
+		request.get('https://api.github.com/users/'+user.login)
+			.end((err,response)=>{
+				this.setState({
+		    		userInfo : response.body
+		    	})
+		    	this.setState({
+		    		modalOpen:true
+		    	});
+			})
+	}
 
     handleOpen(login) {
-    	WalletActions.getUserDetails({login:login});
-    	UserStore.on('change',this._userDataReceived);
+    	this.getUserDetails({login:login});
     }
 
     handleClose(){

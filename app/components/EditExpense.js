@@ -1,12 +1,11 @@
 import React from 'react';
-import WalletStore from '../stores/walletStore'
 
 class EditExpense extends React.Component {
 
 	constructor(){
 		super();
 		this.state = {
-            itemDetails: WalletStore.getItemDetails()
+            itemDetails: []
         };
 	}
 
